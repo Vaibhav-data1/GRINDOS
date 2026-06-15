@@ -1,24 +1,9 @@
 {
-  "name": "grindos",
+  "name": "grindos-core",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "test": "node --test test/*.test.js",
-    "check": "npm test"
-  },
-  "dependencies": {
-    "vite": "latest",
-    "typescript": "latest",
-    "react": "latest",
-    "react-dom": "latest"
-  },
-  "devDependencies": {
-    "tailwindcss": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "check": "node --test test/*.test.js"
   }
 }
