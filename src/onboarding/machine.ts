@@ -7,28 +7,17 @@ export type OnboardingStep =
   | 'activation'
   | 'complete';
 
-const ORDER: OnboardingStep[] = [
-  'signal_detection',
-  'host_identification',
-  'binding_sequence',
-  'contract_sequence',
-  'arc_initialization',
-  'activation',
-  'complete',
-];
-
-export interface OnboardingState {
-  step: OnboardingStep;
-  completedAt?: number;
-}
-
-export function nextStep(current: OnboardingStep): OnboardingStep {
-  const idx = ORDER.indexOf(current);
-  return ORDER[Math.min(idx + 1, ORDER.length - 1)];
-}
-
-export function advanceOnboarding(state: OnboardingState): OnboardingState {
-  const step = nextStep(state.step);
-  if (step === 'complete') return { step, completedAt: Date.now() };
-  return { ...state, step };
+export function advanceOnboarding(current: { step: OnboardingStep; completedAt?: number }) {
+  const order: OnboardingStep[] = [
+    'signal_detection',
+    'host_identification',
+    'binding_sequence',
+    'contract_sequence',
+    'arc_initialization',
+    'activation',
+    'complete',
+  ];
+  const idx = Math.max(0, order.indexOf(current.step));
+  const next = order[Math.min(order.length - 1, idx + 1)];
+  return next === 'complete' ? { step: 'complete', completedAt: Date.now() } : { step: next };
 }
